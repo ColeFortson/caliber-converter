@@ -16,7 +16,7 @@ numGroups = 0
 index = 0
 allShots = list()
 
-os.chdir("/Users/colefortson/Desktop/caliber-converter/")
+os.chdir("./")
 for file in glob.glob("*.%s" % fileType):
     allShots.append(str(file))
     index += 1
