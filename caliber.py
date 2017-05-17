@@ -23,18 +23,6 @@ for file in glob.glob("*.%s" % fileType):
 
 numGroups = len(allShots)/4
 
-for i in range(numGroups):
-    dir = ("caliber_shot_" + str(i))
-    if os.path.exists(dir):
-        shutil.rmtree(dir)
-    os.makedirs(dir)
-    shutil.copy2(prefix + str(i) + "_" + str(0) + ".png", dir)
-    shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir)
-    shutil.copy2(prefix + str(i) + "_" + str(2) + ".png", dir)
-    shutil.copy2(prefix + str(i) + "_" + str(3) + ".png", dir)
-    shutil.copy2(prefix + str(i) + "_" + str(2) + ".png", dir + "/" + prefix + str(i) + "_" + str(4) + ".png")
-    shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir + "/" + prefix + str(i) + "_" + str(5) + ".png")
-
 print allShots
 # Set up filename
 outputName = "caliber_" # output prefix- please don't change
@@ -50,7 +38,23 @@ outputName += ".mp4"
 # Runs a batch command to make those images into a quick video
 # !!! Framerate needs to be a multiple of 6 !!!
 #for i in range():
-os.system("ffmpeg -f image2 -r 12 -i cimg_0_%d.png -vcodec mpeg4 -y " + str(outputName))
 
 # Removed, for now...
 #os.system("ffmpeg -f concat -i cat.txt -codec copy output.mp4")
+
+
+for i in range(numGroups):
+    dir = ("caliber_shot_" + str(i))
+    if os.path.exists(dir):
+        shutil.rmtree(dir)
+    os.makedirs(dir)
+    shutil.copy2(prefix + str(i) + "_" + str(0) + ".png", dir)
+    shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir)
+    shutil.copy2(prefix + str(i) + "_" + str(2) + ".png", dir)
+    shutil.copy2(prefix + str(i) + "_" + str(3) + ".png", dir)
+    shutil.copy2(prefix + str(i) + "_" + str(2) + ".png", dir + "/" + prefix + str(i) + "_" + str(4) + ".png")
+    shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir + "/" + prefix + str(i) + "_" + str(5) + ".png")
+    os.system("ffmpeg -f image2 -r 12 -i " + dir +"/cimg_" + str(i) + "_%d.png -vcodec mpeg4 -y " + dir + "/" + str(outputName))
+
+
+
