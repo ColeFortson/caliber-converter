@@ -1,9 +1,9 @@
 ![](assets/clogoalpha.png)
 📸 Conversion tool for Kobalt's Caliber Bullet-Time Camera
 
-#Requirements
+# Requirements
 - ffmpeg
 
-#TODO
+# TODO
 - [ ] Bluetooth
 - [ ] Multiple videos
