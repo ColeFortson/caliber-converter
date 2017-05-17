@@ -56,7 +56,6 @@ for i in range(numGroups):
 
     outputName = "caliber_" # output prefix- please don't change
     outputName += str(i)
-    outputName += ".mp4"
 
     shutil.copy2(prefix + str(i) + "_" + str(0) + ".png", dir)
     shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir)
@@ -66,14 +65,14 @@ for i in range(numGroups):
     shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir + "/" + prefix + str(i) + "_" + str(5) + ".png")
 
     # Don't even ask idk either anymore lol
-    os.system("ffmpeg -f image2 -r 12 -i " + dir + "/cimg_" + str(i) + "_%d.png -vcodec mpeg4 -y " + dir + "/" + str(outputName))
+    os.system("ffmpeg -f image2 -r 12 -i " + dir + "/cimg_" + str(i) + "_%d.png -vcodec mpeg4 -y " + dir + "/" + str(outputName) + ".mp4")
     f = open(dir + "/cat.txt","w+")
     for i in range(4):
-        f.write("file '%s'\n" % (outputName))
+        f.write("file '%s.mp4'\n" % (outputName))
     f.close()
 
 # Dr. T exerts his godly magic python powers to fix this somehow
-    command="ffmpeg -safe 0 -f concat -i %s/cat.txt -c copy %s/"+ prefix + str(i) +"_looped.mp4" %(dir,dir)
+    command="ffmpeg -safe 0 -f concat -i %s/cat.txt -c copy %s/%s_looped.mp4" %(dir,dir,outputName)
     os.system(command)
 
 
