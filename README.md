@@ -5,6 +5,5 @@
 - ffmpeg
 
 #TODO
-[ ] Bluetooth
-
-[ ] Multiple videos
+- [ ] Bluetooth
+- [ ] Multiple videos
