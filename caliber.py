@@ -5,13 +5,13 @@
 #---------------------------------------------------------------#
 
 #!/usr/bin/python
+
 import os, glob, shutil
 from shutil import copyfile
 
 prefix = "cimg_"
 fileType = "png"
 group = 0 # batch number for photos
-maxGroup = 0
 numGroups = 0
 index = 0
 allShots = list()
@@ -44,20 +44,36 @@ outputName += ".mp4"
 
 
 for i in range(numGroups):
+    
     dir = ("caliber_shot_" + str(i))
+    
     if os.path.exists(dir):
         shutil.rmtree(dir)
+# Create directory if it doesn't already exist
     os.makedirs(dir)
+
+    outputName = "caliber_" # output prefix- please don't change
+    outputName += str(i)
+    outputName += ".mp4"
+
     shutil.copy2(prefix + str(i) + "_" + str(0) + ".png", dir)
     shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir)
     shutil.copy2(prefix + str(i) + "_" + str(2) + ".png", dir)
     shutil.copy2(prefix + str(i) + "_" + str(3) + ".png", dir)
     shutil.copy2(prefix + str(i) + "_" + str(2) + ".png", dir + "/" + prefix + str(i) + "_" + str(4) + ".png")
     shutil.copy2(prefix + str(i) + "_" + str(1) + ".png", dir + "/" + prefix + str(i) + "_" + str(5) + ".png")
-    # Don't even ask idk either anymore lol. it works so don't fuck with it
-    os.system("ffmpeg -f image2 -r 12 -i " + dir +"/cimg_" + str(i) + "_%d.png -vcodec mpeg4 -y " + dir + "/" + str(outputName))
+
+# Don't even ask idk either anymore lol. it works so don't fuck with it
+    os.system("ffmpeg -f image2 -r 12 -i " + dir + "/cimg_" + str(i) + "_%d.png -vcodec mpeg4 -y " + dir + "/" + str(outputName))
+    f = open(dir + "/cat.txt","w+")
+    f.write("# meow\r\n")
+    for i in range(4):
+        f.write("file '%s'\r\n" % (outputName))
+
+#    os.system("ffmpeg -i " + dir + "/" + str(outputName) + " -c copy -bsf:v h264 -f mpegts intermediate.ts")
+#    os.system("ffmpeg -i 'concat:intermediate1.ts|intermediate1.ts' -c copy -bsf:a aac_adtstoasc " + dir + "/" + "output.mp4")
 
 
 
-# "IF I CAN'T BE THE BEST, THEN I SURE AS HELL CAN BE THE WOOOOOORSSSTTTTTTT!" - Jon Jafari ( https://www.youtube.com/watch?v=RSKmPP7ckzU )
+# "IF I CAN'T BE THE BEST, I SURE AS HELL CAN BE THE WOOOOOORSSSTTTTTTT!" - Jon Jafari ( https://www.youtube.com/watch?v=RSKmPP7ckzU )
 # Stay inspired <3
